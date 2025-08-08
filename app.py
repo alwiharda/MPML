@@ -11,7 +11,7 @@ from sklearn.ensemble import RandomForestClassifier
 @st.cache_resource
 def train_model():
     # Load dataset
-    df = pd.read_csv("MEN_SHOES.csv")
+    df = pd.read_csv("D:\\semester 4\\MP ML\\UAS\\MEN_SHOES.csv")
 
     # Preprocessing kolom numerik dan kategorik
     df['How_Many_Sold'] = df['How_Many_Sold'].replace(',', '', regex=True).astype(int)
@@ -85,3 +85,4 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
