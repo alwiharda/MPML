@@ -14,13 +14,16 @@ def train_model():
     df = pd.read_csv("MEN_SHOES.csv")
 
     # Preprocessing kolom numerik dan kategorik
-    df['How_Many_Sold'] = df['How_Many_Sold'].replace(',', '', regex=True).astype(int)
+    df['How_Many_Sold'] = df['How_Many_Sold'].replace(',', '', regex=True)
+    df['How_Many_Sold'] = pd.to_numeric(df['How_Many_Sold'], errors='coerce')
+
     df['Current_Price'] = df['Current_Price'].replace('[₹,]', '', regex=True)
-df['Current_Price'] = pd.to_numeric(df['Current_Price'], errors='coerce')
-df['Current_Price'].fillna(df['Current_Price'].median(), inplace=True)
+    df['Current_Price'] = pd.to_numeric(df['Current_Price'], errors='coerce')
+
     df['RATING'] = pd.to_numeric(df['RATING'], errors='coerce')
 
     df.dropna(inplace=True)
+
 
     # Target dan fitur
     X = df[['Brand_Name', 'Current_Price', 'How_Many_Sold']]
@@ -87,5 +90,6 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
 
 
