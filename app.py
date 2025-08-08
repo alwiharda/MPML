@@ -1,6 +1,13 @@
 import streamlit as st
 import pandas as pd
 import joblib
+import sklearn
+import sklearn.compose._column_transformer
+import types
+
+# Fix untuk AttributeError "_RemainderColsList"
+if not hasattr(sklearn.compose._column_transformer, "_RemainderColsList"):
+    sklearn.compose._column_transformer._RemainderColsList = list
 
 # Load model
 model = joblib.load("best_shoe_model.sav")
@@ -68,3 +75,4 @@ if st.button("Prediksi"):
         st.success("✅ Prediksi: Rating sepatu kemungkinan 4 atau lebih (rekomendasi bagus).")
     else:
         st.warning("⚠️ Prediksi: Rating sepatu kemungkinan di bawah 4.")
+
