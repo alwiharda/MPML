@@ -15,7 +15,9 @@ def train_model():
 
     # Preprocessing kolom numerik dan kategorik
     df['How_Many_Sold'] = df['How_Many_Sold'].replace(',', '', regex=True).astype(int)
-    df['Current_Price'] = df['Current_Price'].replace('[₹,]', '', regex=True).astype(int)
+    df['Current_Price'] = df['Current_Price'].replace('[₹,]', '', regex=True)
+df['Current_Price'] = pd.to_numeric(df['Current_Price'], errors='coerce')
+df['Current_Price'].fillna(df['Current_Price'].median(), inplace=True)
     df['RATING'] = pd.to_numeric(df['RATING'], errors='coerce')
 
     df.dropna(inplace=True)
@@ -85,4 +87,5 @@ st.markdown("""
     }
 </style>
 """, unsafe_allow_html=True)
+
 
